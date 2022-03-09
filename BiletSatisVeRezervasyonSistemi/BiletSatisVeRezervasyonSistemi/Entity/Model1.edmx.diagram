@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="10d2045f207e420ea818e780eeb4b1b3" Name="Diagram1">
+        <EntityTypeShape EntityType="BiletRezervasyonDBModel.TBilet" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiletRezervasyonDBModel.TOtobus" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiletRezervasyonDBModel.TRezervasyon" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiletRezervasyonDBModel.TYolcu" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="BiletRezervasyonDBModel.FK_TBilet_TOtobus" ManuallyRouted="false" />
+        <AssociationConnector Association="BiletRezervasyonDBModel.FK_TBilet_TYolcu" ManuallyRouted="false" />
+        <AssociationConnector Association="BiletRezervasyonDBModel.FK_TRezervasyon_TOtobus" ManuallyRouted="false" />
+        <AssociationConnector Association="BiletRezervasyonDBModel.FK_TRezervasyon_TYolcu" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BiletRezervasyonDBModel.TYonetici" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BiletRezervasyonDBModel.TKoltuk" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="BiletRezervasyonDBModel.TSefer" Width="1.5" PointX="3" PointY="7.625" />
+        <AssociationConnector Association="BiletRezervasyonDBModel.FK_TBilet_TKoltuk" />
+        <AssociationConnector Association="BiletRezervasyonDBModel.FK_TKoltuk_TOtobus" />
+        <AssociationConnector Association="BiletRezervasyonDBModel.FK_TRezervasyon_TKoltuk" />
+        <AssociationConnector Association="BiletRezervasyonDBModel.FK_TSefer_TOtobus" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

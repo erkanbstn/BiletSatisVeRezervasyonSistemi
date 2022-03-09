@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BiletRezervasyonDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TBilet">
+    <Key>
+      <PropertyRef Name="BiletID" />
+    </Key>
+    <Property Name="BiletID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="No" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Otobus" Type="Int32" />
+    <Property Name="Kisi" Type="Int32" />
+    <Property Name="Koltuk" Type="Int32" />
+    <Property Name="Durum" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TOtobus" Relationship="Self.FK_TBilet_TOtobus" FromRole="TBilet" ToRole="TOtobus" />
+    <NavigationProperty Name="TYolcu" Relationship="Self.FK_TBilet_TYolcu" FromRole="TBilet" ToRole="TYolcu" />
+    <NavigationProperty Name="TKoltuk" Relationship="BiletRezervasyonDBModel.FK_TBilet_TKoltuk" FromRole="TBilet" ToRole="TKoltuk" />
+    <Property Name="OlusumTarih" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="TOtobus">
+    <Key>
+      <PropertyRef Name="OtobusID" />
+    </Key>
+    <Property Name="OtobusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="No" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBilet" Relationship="Self.FK_TBilet_TOtobus" FromRole="TOtobus" ToRole="TBilet" />
+    <NavigationProperty Name="TRezervasyon" Relationship="Self.FK_TRezervasyon_TOtobus" FromRole="TOtobus" ToRole="TRezervasyon" />
+    <NavigationProperty Name="TKoltuk" Relationship="BiletRezervasyonDBModel.FK_TKoltuk_TOtobus" FromRole="TOtobus" ToRole="TKoltuk" />
+    <NavigationProperty Name="TSefer" Relationship="BiletRezervasyonDBModel.FK_TSefer_TOtobus" FromRole="TOtobus" ToRole="TSefer" />
+  </EntityType>
+  <EntityType Name="TRezervasyon">
+    <Key>
+      <PropertyRef Name="RezervasyonID" />
+    </Key>
+    <Property Name="RezervasyonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Kisi" Type="Int32" />
+    <Property Name="Otobus" Type="Int32" />
+    <Property Name="Koltuk" Type="Int32" />
+    <Property Name="Tarih" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="TOtobus" Relationship="Self.FK_TRezervasyon_TOtobus" FromRole="TRezervasyon" ToRole="TOtobus" />
+    <NavigationProperty Name="TYolcu" Relationship="Self.FK_TRezervasyon_TYolcu" FromRole="TRezervasyon" ToRole="TYolcu" />
+    <NavigationProperty Name="TKoltuk" Relationship="BiletRezervasyonDBModel.FK_TRezervasyon_TKoltuk" FromRole="TRezervasyon" ToRole="TKoltuk" />
+  </EntityType>
+  <EntityType Name="TYolcu">
+    <Key>
+      <PropertyRef Name="YolcuID" />
+    </Key>
+    <Property Name="YolcuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KisiBilgi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBilet" Relationship="Self.FK_TBilet_TYolcu" FromRole="TYolcu" ToRole="TBilet" />
+    <NavigationProperty Name="TRezervasyon" Relationship="Self.FK_TRezervasyon_TYolcu" FromRole="TYolcu" ToRole="TRezervasyon" />
+    <Property Name="Parola" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_TBilet_TOtobus">
+    <End Role="TOtobus" Type="Self.TOtobus" Multiplicity="0..1" />
+    <End Role="TBilet" Type="Self.TBilet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TOtobus">
+        <PropertyRef Name="OtobusID" />
+      </Principal>
+      <Dependent Role="TBilet">
+        <PropertyRef Name="Otobus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBilet_TYolcu">
+    <End Role="TYolcu" Type="Self.TYolcu" Multiplicity="0..1" />
+    <End Role="TBilet" Type="Self.TBilet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TYolcu">
+        <PropertyRef Name="YolcuID" />
+      </Principal>
+      <Dependent Role="TBilet">
+        <PropertyRef Name="Kisi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRezervasyon_TOtobus">
+    <End Role="TOtobus" Type="Self.TOtobus" Multiplicity="0..1" />
+    <End Role="TRezervasyon" Type="Self.TRezervasyon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TOtobus">
+        <PropertyRef Name="OtobusID" />
+      </Principal>
+      <Dependent Role="TRezervasyon">
+        <PropertyRef Name="Otobus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRezervasyon_TYolcu">
+    <End Role="TYolcu" Type="Self.TYolcu" Multiplicity="0..1" />
+    <End Role="TRezervasyon" Type="Self.TRezervasyon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TYolcu">
+        <PropertyRef Name="YolcuID" />
+      </Principal>
+      <Dependent Role="TRezervasyon">
+        <PropertyRef Name="Kisi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BiletRezervasyonDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TBilet" EntityType="Self.TBilet" />
+    <EntitySet Name="TOtobus" EntityType="Self.TOtobus" />
+    <EntitySet Name="TRezervasyon" EntityType="Self.TRezervasyon" />
+    <EntitySet Name="TYolcu" EntityType="Self.TYolcu" />
+    <AssociationSet Name="FK_TBilet_TOtobus" Association="Self.FK_TBilet_TOtobus">
+      <End Role="TOtobus" EntitySet="TOtobus" />
+      <End Role="TBilet" EntitySet="TBilet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBilet_TYolcu" Association="Self.FK_TBilet_TYolcu">
+      <End Role="TYolcu" EntitySet="TYolcu" />
+      <End Role="TBilet" EntitySet="TBilet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRezervasyon_TOtobus" Association="Self.FK_TRezervasyon_TOtobus">
+      <End Role="TOtobus" EntitySet="TOtobus" />
+      <End Role="TRezervasyon" EntitySet="TRezervasyon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRezervasyon_TYolcu" Association="Self.FK_TRezervasyon_TYolcu">
+      <End Role="TYolcu" EntitySet="TYolcu" />
+      <End Role="TRezervasyon" EntitySet="TRezervasyon" />
+    </AssociationSet>
+    <EntitySet Name="TYonetici" EntityType="BiletRezervasyonDBModel.TYonetici" />
+    <EntitySet Name="TKoltuk" EntityType="BiletRezervasyonDBModel.TKoltuk" />
+    <EntitySet Name="TSefer" EntityType="BiletRezervasyonDBModel.TSefer" />
+    <AssociationSet Name="FK_TBilet_TKoltuk" Association="BiletRezervasyonDBModel.FK_TBilet_TKoltuk">
+      <End Role="TKoltuk" EntitySet="TKoltuk" />
+      <End Role="TBilet" EntitySet="TBilet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TKoltuk_TOtobus" Association="BiletRezervasyonDBModel.FK_TKoltuk_TOtobus">
+      <End Role="TOtobus" EntitySet="TOtobus" />
+      <End Role="TKoltuk" EntitySet="TKoltuk" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRezervasyon_TKoltuk" Association="BiletRezervasyonDBModel.FK_TRezervasyon_TKoltuk">
+      <End Role="TKoltuk" EntitySet="TKoltuk" />
+      <End Role="TRezervasyon" EntitySet="TRezervasyon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSefer_TOtobus" Association="BiletRezervasyonDBModel.FK_TSefer_TOtobus">
+      <End Role="TOtobus" EntitySet="TOtobus" />
+      <End Role="TSefer" EntitySet="TSefer" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TYonetici">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Kullanici" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TKoltuk">
+    <Key>
+      <PropertyRef Name="KoltukID" />
+    </Key>
+    <Property Name="KoltukID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KoltukNo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Otobus" Type="Int32" />
+    <NavigationProperty Name="TBilet" Relationship="BiletRezervasyonDBModel.FK_TBilet_TKoltuk" FromRole="TKoltuk" ToRole="TBilet" />
+    <NavigationProperty Name="TOtobus" Relationship="BiletRezervasyonDBModel.FK_TKoltuk_TOtobus" FromRole="TKoltuk" ToRole="TOtobus" />
+    <NavigationProperty Name="TRezervasyon" Relationship="BiletRezervasyonDBModel.FK_TRezervasyon_TKoltuk" FromRole="TKoltuk" ToRole="TRezervasyon" />
+  </EntityType>
+  <EntityType Name="TSefer">
+    <Key>
+      <PropertyRef Name="SeferID" />
+    </Key>
+    <Property Name="SeferID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Guzergah" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Otobus" Type="Int32" />
+    <Property Name="SeferSaat" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="VarisSaat" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="SeferTarih" Type="DateTime" Precision="0" />
+    <Property Name="Durum" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TOtobus" Relationship="BiletRezervasyonDBModel.FK_TSefer_TOtobus" FromRole="TSefer" ToRole="TOtobus" />
+  </EntityType>
+  <Association Name="FK_TBilet_TKoltuk">
+    <End Type="BiletRezervasyonDBModel.TKoltuk" Role="TKoltuk" Multiplicity="0..1" />
+    <End Type="BiletRezervasyonDBModel.TBilet" Role="TBilet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TKoltuk">
+        <PropertyRef Name="KoltukID" />
+      </Principal>
+      <Dependent Role="TBilet">
+        <PropertyRef Name="Koltuk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TKoltuk_TOtobus">
+    <End Type="BiletRezervasyonDBModel.TOtobus" Role="TOtobus" Multiplicity="0..1" />
+    <End Type="BiletRezervasyonDBModel.TKoltuk" Role="TKoltuk" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TOtobus">
+        <PropertyRef Name="OtobusID" />
+      </Principal>
+      <Dependent Role="TKoltuk">
+        <PropertyRef Name="Otobus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRezervasyon_TKoltuk">
+    <End Type="BiletRezervasyonDBModel.TKoltuk" Role="TKoltuk" Multiplicity="0..1" />
+    <End Type="BiletRezervasyonDBModel.TRezervasyon" Role="TRezervasyon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TKoltuk">
+        <PropertyRef Name="KoltukID" />
+      </Principal>
+      <Dependent Role="TRezervasyon">
+        <PropertyRef Name="Koltuk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSefer_TOtobus">
+    <End Type="BiletRezervasyonDBModel.TOtobus" Role="TOtobus" Multiplicity="0..1" />
+    <End Type="BiletRezervasyonDBModel.TSefer" Role="TSefer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TOtobus">
+        <PropertyRef Name="OtobusID" />
+      </Principal>
+      <Dependent Role="TSefer">
+        <PropertyRef Name="Otobus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

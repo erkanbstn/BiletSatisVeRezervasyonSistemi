@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BiletRezervasyonDBModelStoreContainer" CdmEntityContainer="BiletRezervasyonDBEntities">
+    <EntitySetMapping Name="TBilet">
+      <EntityTypeMapping TypeName="BiletRezervasyonDBModel.TBilet">
+        <MappingFragment StoreEntitySet="TBilet">
+          <ScalarProperty Name="OlusumTarih" ColumnName="OlusumTarih" />
+          <ScalarProperty Name="BiletID" ColumnName="BiletID" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="Otobus" ColumnName="Otobus" />
+          <ScalarProperty Name="Kisi" ColumnName="Kisi" />
+          <ScalarProperty Name="Koltuk" ColumnName="Koltuk" />
+          <ScalarProperty Name="Durum" ColumnName="Durum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TOtobus">
+      <EntityTypeMapping TypeName="BiletRezervasyonDBModel.TOtobus">
+        <MappingFragment StoreEntitySet="TOtobus">
+          <ScalarProperty Name="OtobusID" ColumnName="OtobusID" />
+          <ScalarProperty Name="No" ColumnName="No" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRezervasyon">
+      <EntityTypeMapping TypeName="BiletRezervasyonDBModel.TRezervasyon">
+        <MappingFragment StoreEntitySet="TRezervasyon">
+          <ScalarProperty Name="RezervasyonID" ColumnName="RezervasyonID" />
+          <ScalarProperty Name="Kisi" ColumnName="Kisi" />
+          <ScalarProperty Name="Otobus" ColumnName="Otobus" />
+          <ScalarProperty Name="Koltuk" ColumnName="Koltuk" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TYolcu">
+      <EntityTypeMapping TypeName="BiletRezervasyonDBModel.TYolcu">
+        <MappingFragment StoreEntitySet="TYolcu">
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="Parola" ColumnName="Parola" />
+          <ScalarProperty Name="YolcuID" ColumnName="YolcuID" />
+          <ScalarProperty Name="KisiBilgi" ColumnName="KisiBilgi" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TYonetici">
+      <EntityTypeMapping TypeName="BiletRezervasyonDBModel.TYonetici">
+        <MappingFragment StoreEntitySet="TYonetici">
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+          <ScalarProperty Name="Kullanici" ColumnName="Kullanici" />
+          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TKoltuk">
+      <EntityTypeMapping TypeName="BiletRezervasyonDBModel.TKoltuk">
+        <MappingFragment StoreEntitySet="TKoltuk">
+          <ScalarProperty Name="Otobus" ColumnName="Otobus" />
+          <ScalarProperty Name="KoltukNo" ColumnName="KoltukNo" />
+          <ScalarProperty Name="KoltukID" ColumnName="KoltukID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TSefer">
+      <EntityTypeMapping TypeName="BiletRezervasyonDBModel.TSefer">
+        <MappingFragment StoreEntitySet="TSefer">
+          <ScalarProperty Name="Durum" ColumnName="Durum" />
+          <ScalarProperty Name="SeferTarih" ColumnName="SeferTarih" />
+          <ScalarProperty Name="VarisSaat" ColumnName="VarisSaat" />
+          <ScalarProperty Name="SeferSaat" ColumnName="SeferSaat" />
+          <ScalarProperty Name="Otobus" ColumnName="Otobus" />
+          <ScalarProperty Name="Guzergah" ColumnName="Guzergah" />
+          <ScalarProperty Name="SeferID" ColumnName="SeferID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
